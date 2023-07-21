@@ -34,7 +34,7 @@ pub fn build(b: *std.build.Builder) void {
                 .optimize = mode,
             });
             dynamic_lib.linkage = linkage;
-            // dynamic_lib.setOutputDir("lib/" ++ platform[1]);
+            dynamic_lib.override_dest_dir = .{ .custom = "lib/" ++ platform[1] };
             dynamic_lib.linkLibC();
             b.installArtifact(dynamic_lib);
             ffi_libs.dependOn(&dynamic_lib.step);
